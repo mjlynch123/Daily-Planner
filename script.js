@@ -42,8 +42,8 @@ $(function () {
         hour.removeClass('present');
         hour.addClass('future');
       }
+    }
   }
-}
 
 getHour();
   //
