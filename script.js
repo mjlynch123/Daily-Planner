@@ -1,20 +1,15 @@
 var today = dayjs();
 var save = $("button");
+var savedMessage = $("#saved");
 var currentHour = today.format("H");
 
 $(document).ready(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-
   // This is the event handler for the save button
   // .click does the same thing as .on("click");
   save.click(function() {
-    // Get the id of the previous sibling with the class description and then we get that id of that element
+    // Get the id of the element with the class description and then we get that id of that element
     var inputId = $(this).prev('.description').attr('id');
+    console.log(inputId);
     //Get the value of the id we got in the previous line
     var task = $(this).prev('.description').val();
     // Get any items saved to local storage, if tasks is empty then we will create a new object
@@ -25,6 +20,14 @@ $(document).ready(function () {
 
     // Save taskObj to local storage
     localStorage.setItem('tasks', JSON.stringify(taskObj));
+
+    // Adding the message to the screen when the user clicks on the save button
+    savedMessage.text('Time slot updated');
+
+    // Clearing the paragraph element after 2 seconds
+    setTimeout(function() {
+      savedMessage.text("");
+    }, 2000);
   });
 
   function getLocal() {
